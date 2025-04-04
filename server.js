@@ -7,6 +7,10 @@ const http = require('http');
 const https = require('https');
 const connectDB = require('./config/db');
 const sampleRoutes = require('./routes/sampleRoute');
+const roleRoutes = require('./routes/roleRoutes');
+const userRoutes = require('./routes/userRoutes');
+const permissionRoutes = require('./routes/permissionRoutes');
+const authMiddleware = require('./middleware/authMiddleware');
 
 // Initialize Express
 const app = express();
@@ -50,6 +54,9 @@ const apiRouter = express.Router();
 
 // Routes
 apiRouter.use('/sample', sampleRoutes);
+apiRouter.use('/roles', roleRoutes); // Secured in roleRoutes.js
+apiRouter.use('/users', userRoutes); // Secured in userRoutes.js
+apiRouter.use('/permissions', permissionRoutes); // Add permission routes
 
 // Health Check
 apiRouter.get("/", (req, res) => res.send("API is running..."));
