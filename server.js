@@ -11,6 +11,7 @@ const roleRoutes = require('./routes/roleRoutes');
 const userRoutes = require('./routes/userRoutes');
 const permissionRoutes = require('./routes/permissionRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
+const { initializeSocket } = require('./utils/notification');
 
 // Initialize Express
 const app = express();
@@ -49,6 +50,9 @@ if (isProduction) {
 } else {
   server = http.createServer(app);
 }
+
+// Initialize Socket.io
+initializeSocket(server);
 
 const apiRouter = express.Router();
 
